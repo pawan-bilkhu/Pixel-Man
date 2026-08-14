@@ -77,29 +77,29 @@ namespace Tether{
         calculateTether()
     })
     function calculateTether() {
-        let distanceToCursor: number = spriteutils.distanceBetween(playerSprite, cursorSprite)
+        // let distanceToCursor: number = spriteutils.distanceBetween(playerSprite, cursorSprite)
 
-        let playerPosition: Vector2 = new Vector2(playerSprite.x, playerSprite.y)
-        let cursorPosition: Vector2 = new Vector2(cursorSprite.x, cursorSprite.y)
-        let targetDirection: Vector2 = cursorPosition.subtract(playerPosition)
-        let targetDistance = spriteutils.distanceBetween(playerSprite, cursorSprite)
+        // let playerPosition: Vector2 = new Vector2(playerSprite.x, playerSprite.y)
+        // let cursorPosition: Vector2 = new Vector2(cursorSprite.x, cursorSprite.y)
+        // let targetDirection: Vector2 = cursorPosition.subtract(playerPosition)
+        // let targetDistance = spriteutils.distanceBetween(playerSprite, cursorSprite)
 
-        let displacement = targetDistance - restLength
+        // let displacement = targetDistance - restLength
 
-        let net_force = Vector2.ZERO()
+        // let net_force = Vector2.ZERO()
 
-        if (displacement > 0){
+        // if (displacement > 0){
 
-             let spring_force_magnitude = stiffness * displacement
-        }
-        let spring_force = targetDirection * spring_force_magnitude
+        //      let spring_force_magnitude = stiffness * displacement
+        // }
+        // let spring_force = targetDirection * spring_force_magnitude
 
-        // let projected_velocity = velocity_component.get_velocity().dot(targetDirection)
-        // let dampening = -dampening_scalar * projected_velocity * targetDirection
+        // // let projected_velocity = velocity_component.get_velocity().dot(targetDirection)
+        // // let dampening = -dampening_scalar * projected_velocity * targetDirection
 
-        net_force = spring_force + dampening
+        // net_force = spring_force + dampening
 
-        velocity_component.velocity += net_force * game.getDeltaTime()
+        // velocity_component.velocity += net_force * game.getDeltaTime()
        
     }
 }
