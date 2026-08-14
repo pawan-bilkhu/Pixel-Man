@@ -5,6 +5,10 @@ let playerSprite: Sprite = null
 let cursorSprite: Sprite = null
 let canJump: boolean = true
 let isTethered: boolean = false
+let spring_force_magnitude: number = 15
+let stiffness: number = 1
+let restLength: number = 10
+let dampening: number = 1
 
 function onStart() {
     setLevel()
@@ -45,9 +49,7 @@ function createCursor() {
     })
 
 }
-function getGlobalMousePosition() : spriteutils.Position {
-    return spriteutils.point(scene.cameraProperty(CameraProperty.Left) + cursorSprite.x, scene.cameraProperty(CameraProperty.Top) + cursorSprite.y)
-}
+
 function setLevel() {
     tiles.setCurrentTilemap(tilemap`test`)
 }
@@ -76,10 +78,28 @@ namespace Tether{
     })
     function calculateTether() {
         let distanceToCursor: number = spriteutils.distanceBetween(playerSprite, cursorSprite)
-        let angleToCursor: number = spriteutils.angleFrom(playerSprite, cursorSprite)
 
-        if(distanceToCursor > 10){
-            spriteutils.setVelocityAtAngle(playerSprite, angleToCursor, 100)
+        let playerPosition: Vector2 = new Vector2(playerSprite.x, playerSprite.y)
+        let cursorPosition: Vector2 = new Vector2(cursorSprite.x, cursorSprite.y)
+        let targetDirection: Vector2 = cursorPosition.subtract(playerPosition)
+        let targetDistance = spriteutils.distanceBetween(playerSprite, cursorSprite)
+
+        let displacement = targetDistance - restLength
+
+        let net_force = Vector2.ZERO()
+
+        if (displacement > 0){
+
+             let spring_force_magnitude = stiffness * displacement
         }
+        let spring_force = targetDirection * spring_force_magnitude
+
+        // let projected_velocity = velocity_component.get_velocity().dot(targetDirection)
+        // let dampening = -dampening_scalar * projected_velocity * targetDirection
+
+        net_force = spring_force + dampening
+
+        velocity_component.velocity += net_force * game.getDeltaTime()
+       
     }
 }
